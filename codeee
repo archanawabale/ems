@@ -1,0 +1,139 @@
+package com.cg;
+
+public class Employee {
+
+	private int empId;
+	private String empName;
+	private double empSal;
+	private String empBU;
+	private int empAge;
+	public int getEmpId() {
+		return empId;
+	}
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public double getEmpSal() {
+		return empSal;
+	}
+	public void setEmpSal(double empSal) {
+		this.empSal = empSal;
+	}
+	public Employee(int empId, String empName, double empSal, String empBU,
+			int empAge) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+		this.empSal = empSal;
+		this.empBU = empBU;
+		this.empAge = empAge;
+	}
+	public String getEmpBU() {
+		return empBU;
+	}
+	public void setEmpBU(String empBU) {
+		this.empBU = empBU;
+	}
+	public int getEmpAge() {
+		return empAge;
+	}
+	public void setEmpAge(int empAge) {
+		this.empAge = empAge;
+	}
+	
+	public void display(){
+		
+		System.out.println("Employee details \n -------------- \n Employee ID: " + empId 
+				+ "\nEmployee name: "+ empName + "\nEmployee salary: " + empSal 
+				+ "\nEmployee Business unit: " + empBU + "\nEmployee age: " +empAge);
+	}
+	
+}
+
+
+***************************************
+
+package com.cg;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class EmployeeClient {
+
+	public static void main(String[] args) {
+	
+		Resource r=new ClassPathResource("applicationContext.xml");  
+        BeanFactory factory=new XmlBeanFactory(r);  
+        Employee b=(Employee)factory.getBean("employee");  
+        b.display();  
+
+		
+	}
+
+}
+
+*************************************
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.samples</groupId>
+  <artifactId>DemoSpring_4</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+
+		<!-- Generic properties -->
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Spring -->
+		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
+
+	</properties>
+	
+	<dependencies>
+			<!-- Spring and Transactions -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>4.3.14.RELEASE</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.1.1.RELEASE</version>
+</dependency>
+			
+	</dependencies>
+</project>
+	
+  *****************************************
+  
+  <?xml version="1.0" encoding="UTF-8"?>  
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
+                
+                
+<bean id="employee" class="com.cg.Employee">  
+<constructor-arg value="12345" type="int"></constructor-arg>  
+<constructor-arg value="Harriet" type="String"></constructor-arg>  
+<constructor-arg value="40000.0" type="double"></constructor-arg>
+<constructor-arg value="PES-BU" type="String"></constructor-arg>  
+<constructor-arg value="30" type="int"></constructor-arg>    
+</bean>  
+</beans>
